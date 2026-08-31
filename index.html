@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="che canzone">
+<meta name="theme-color" content="#1c1b22">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>che canzone</title>
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f6f6f8;
+    --card: #ffffff;
+    --card-2: #f0f0f4;
+    --text: #1a1a20;
+    --muted: #6a6a76;
+    --line: #e2e2e8;
+    --accent: #5b4bde;
+    --accent-text: #ffffff;
+    --danger: #c0341d;
+    --radius: 16px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #131217;
+      --card: #1f1e26;
+      --card-2: #26252f;
+      --text: #ececf0;
+      --muted: #9a99a6;
+      --line: #33323d;
+      --accent: #8878ff;
+      --accent-text: #14121f;
+      --danger: #ff6b52;
+    }
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+  body {
+    font: 17px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    min-height: 100vh;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 14px 16px 48px; }
+
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 6px 0 14px;
+  }
+  header h1 { font-size: 20px; margin: 0; letter-spacing: -0.01em; }
+  header .links { display: flex; gap: 6px; }
+  .iconbtn {
+    border: 1px solid var(--line); background: var(--card);
+    color: var(--text); border-radius: 12px; padding: 8px 12px;
+    font-size: 14px; min-height: 40px; cursor: pointer;
+  }
+  .iconbtn:active { background: var(--card-2); }
+
+  section { display: block; }
+  section[hidden] { display: none !important; }
+
+  textarea {
+    width: 100%; min-height: 120px; resize: vertical;
+    font: inherit; color: var(--text); background: var(--card);
+    border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 14px; margin: 0 0 12px;
+  }
+  textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+
+  .btn {
+    display: block; width: 100%; text-align: center;
+    background: var(--accent); color: var(--accent-text);
+    border: none; border-radius: var(--radius); padding: 15px;
+    font: inherit; font-weight: 600; min-height: 52px; cursor: pointer;
+  }
+  .btn:active { filter: brightness(0.94); }
+  .btn.secondary { background: var(--card); color: var(--text); border: 1px solid var(--line); }
+  .btn.small { padding: 11px; min-height: 44px; font-weight: 500; font-size: 15px; }
+
+  .hint { color: var(--muted); font-size: 14px; margin: 4px 2px 0; }
+  .error { color: var(--danger); font-size: 15px; margin: 10px 2px; }
+
+  .spinner {
+    display: flex; align-items: center; gap: 10px; color: var(--muted);
+    padding: 20px 2px; font-size: 15px;
+  }
+  .spinner::before {
+    content: ""; width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid var(--line); border-top-color: var(--accent);
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 14px; margin: 0 0 10px;
+    width: 100%; text-align: left; color: var(--text);
+    font: inherit; cursor: pointer; display: block;
+  }
+  .card:active { background: var(--card-2); }
+  .card .t { font-weight: 600; font-size: 17px; }
+  .card .a { color: var(--muted); font-size: 15px; margin-top: 2px; }
+  .card .w { color: var(--muted); font-size: 13px; margin-top: 6px; }
+
+  .cover {
+    width: 100%; max-width: 300px; aspect-ratio: 1 / 1; object-fit: cover;
+    border-radius: var(--radius); border: 1px solid var(--line);
+    display: block; margin: 0 auto 14px; background: var(--card-2);
+  }
+  .result h2 { font-size: 22px; margin: 0 0 2px; text-align: center; letter-spacing: -0.01em; }
+  .result .by { color: var(--muted); text-align: center; margin: 0 0 4px; }
+  .result .album { color: var(--muted); text-align: center; font-size: 14px; margin: 0 0 18px; }
+
+  .block { margin: 0 0 20px; }
+  .block h3 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 0 0 8px; }
+  .facts { margin: 0; padding: 0; list-style: none; }
+  .facts li {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 12px; margin: 0 0 8px; font-size: 15.5px;
+  }
+
+  details.lyrics {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 0 14px;
+  }
+  details.lyrics summary {
+    padding: 13px 0; cursor: pointer; font-weight: 600; list-style: none;
+  }
+  details.lyrics summary::-webkit-details-marker { display: none; }
+  details.lyrics summary::after { content: " ▾"; color: var(--muted); }
+  details.lyrics[open] summary::after { content: " ▴"; }
+  .lyricsbody {
+    white-space: pre-wrap; font-size: 15px; line-height: 1.6;
+    max-height: 46vh; overflow: auto; padding: 0 0 14px;
+    border-top: 1px solid var(--line); margin-top: 2px; padding-top: 12px;
+  }
+  .src { color: var(--muted); font-size: 12px; margin-top: 6px; }
+
+  .listen { display: flex; flex-wrap: wrap; gap: 8px; }
+  .listen a {
+    flex: 1 1 30%; text-align: center; text-decoration: none;
+    background: var(--card); color: var(--text); border: 1px solid var(--line);
+    border-radius: 12px; padding: 11px 6px; font-size: 14px; min-height: 44px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .listen a:active { background: var(--card-2); }
+
+  .row {
+    display: block; width: 100%; text-align: left; background: var(--card);
+    border: 1px solid var(--line); border-radius: 12px; padding: 12px;
+    margin: 0 0 8px; color: var(--text); font: inherit; cursor: pointer;
+  }
+  .row:active { background: var(--card-2); }
+  .row .t { font-weight: 600; }
+  .row .m { color: var(--muted); font-size: 13px; margin-top: 2px; }
+
+  label.field { display: block; margin: 0 0 14px; }
+  label.field span { display: block; font-size: 14px; color: var(--muted); margin: 0 0 6px; }
+  label.field input {
+    width: 100%; font: inherit; color: var(--text); background: var(--card);
+    border: 1px solid var(--line); border-radius: 12px; padding: 12px;
+  }
+  .stack > * + * { margin-top: 10px; }
+  .backlink { margin: 16px 0 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>che canzone</h1>
+    <div class="links">
+      <button class="iconbtn" id="nav-history" type="button">Storico</button>
+      <button class="iconbtn" id="nav-settings" type="button">⚙︎</button>
+    </div>
+  </header>
+
+  <!-- ============ RICERCA ============ -->
+  <section id="view-search">
+    <textarea id="q" rows="4" autocapitalize="sentences" autocorrect="on"
+      placeholder="Dimmi cosa ricordi… un pezzo di titolo, un verso, «quella di Gazzelle del 2020»"></textarea>
+    <button class="btn" id="go" type="button">Cerca</button>
+    <p class="hint">Tocca il microfono sulla tastiera per dettare.</p>
+    <div id="search-msg"></div>
+  </section>
+
+  <!-- ============ CANDIDATI ============ -->
+  <section id="view-candidates" hidden>
+    <div id="cand-loading" class="spinner" hidden>Sto cercando…</div>
+    <div id="cand-list"></div>
+    <div id="cand-empty" hidden>
+      <p class="error">Non ho capito. Aggiungi un dettaglio (un altro pezzo di testo, l'artista, l'anno) e riprova.</p>
+    </div>
+    <button class="btn secondary small backlink" id="cand-back" type="button">← Modifica ricerca</button>
+  </section>
+
+  <!-- ============ RISULTATO ============ -->
+  <section id="view-result" hidden>
+    <div id="res-loading" class="spinner" hidden>Carico il brano…</div>
+    <div id="res-body" class="result" hidden>
+      <img id="res-cover" class="cover" alt="" hidden>
+      <h2 id="res-title"></h2>
+      <p class="by" id="res-artist"></p>
+      <p class="album" id="res-album"></p>
+
+      <div class="block" id="res-facts-block">
+        <h3>Curiosità</h3>
+        <ul class="facts" id="res-facts"></ul>
+      </div>
+
+      <div class="block">
+        <h3>Testo</h3>
+        <details class="lyrics" id="res-lyrics-wrap">
+          <summary>Mostra il testo</summary>
+          <div class="lyricsbody" id="res-lyrics"></div>
+        </details>
+        <p class="src" id="res-lyrics-src"></p>
+      </div>
+
+      <div class="block">
+        <h3>Ascolta</h3>
+        <div class="listen" id="res-listen"></div>
+      </div>
+
+      <div class="stack">
+        <button class="btn small" id="res-share" type="button">Condividi</button>
+        <button class="btn secondary small" id="res-new" type="button">Nuova ricerca</button>
+      </div>
+    </div>
+    <div id="res-msg"></div>
+  </section>
+
+  <!-- ============ STORICO ============ -->
+  <section id="view-history" hidden>
+    <label class="field"><span>Cerca nello storico</span>
+      <input type="search" id="hist-q" placeholder="titolo o artista" autocapitalize="none" autocorrect="off">
+    </label>
+    <div id="hist-loading" class="spinner" hidden>Carico…</div>
+    <div id="hist-list"></div>
+    <div id="hist-msg"></div>
+    <button class="btn secondary small backlink" id="hist-back" type="button">← Torna alla ricerca</button>
+  </section>
+
+  <!-- ============ IMPOSTAZIONI ============ -->
+  <section id="view-settings" hidden>
+    <label class="field"><span>URL del Worker</span>
+      <input type="url" id="set-url" placeholder="https://che-canzone-api.xxx.workers.dev" autocapitalize="none" autocorrect="off" spellcheck="false">
+    </label>
+    <label class="field"><span>Chiave app (X-App-Key)</span>
+      <input type="password" id="set-key" placeholder="il secret APP_KEY del Worker" autocapitalize="none" autocorrect="off" spellcheck="false">
+    </label>
+    <p class="hint">La chiave la trovi nelle impostazioni del Worker su Cloudflare (secret <code>APP_KEY</code>). Viene salvata solo su questo telefono.</p>
+    <button class="btn small" id="set-save" type="button">Salva</button>
+    <div id="set-msg"></div>
+    <button class="btn secondary small backlink" id="set-back" type="button">← Torna alla ricerca</button>
+  </section>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  "use strict";
+
+  // ---- default: sostituito allo Step 8 con l'URL reale del Worker ----
+  var DEFAULT_WORKER_URL = "https://che-canzone-api.CHANGEME.workers.dev";
+
+  var LS = {
+    url: "cc_url",
+    key: "cc_appkey",
+    recent: "cc_recent"
+  };
+  var MAX_RECENT = 20;
+
+  function $(id) { return document.getElementById(id); }
+  function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+  function workerUrl() {
+    var u = (lsGet(LS.url) || DEFAULT_WORKER_URL || "").trim();
+    return u.replace(/\/+$/, "");
+  }
+  function appKey() { return (lsGet(LS.key) || "").trim(); }
+
+  function online() { return navigator.onLine !== false; }
+
+  var views = ["search", "candidates", "result", "history", "settings"];
+  function show(name) {
+    views.forEach(function (v) { $("view-" + v).hidden = (v !== name); });
+    window.scrollTo(0, 0);
+  }
+
+  // ---------------------------------------------------------------
+  // API
+  // ---------------------------------------------------------------
+  function api(path, opts) {
+    opts = opts || {};
+    var base = workerUrl();
+    if (!base || base.indexOf("CHANGEME") !== -1) {
+      return Promise.reject(new Error("no-url"));
+    }
+    if (!appKey()) return Promise.reject(new Error("no-key"));
+    var headers = { "X-App-Key": appKey() };
+    if (opts.body) headers["Content-Type"] = "application/json";
+    return fetch(base + path, {
+      method: opts.method || "GET",
+      headers: headers,
+      body: opts.body ? JSON.stringify(opts.body) : undefined
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (data) {
+        if (!r.ok) {
+          var e = new Error(data.error || ("HTTP " + r.status));
+          e.status = r.status;
+          throw e;
+        }
+        return data;
+      });
+    });
+  }
+
+  function apiErrorText(err) {
+    if (err && err.message === "no-url") return "Manca l'URL del Worker. Aprine le Impostazioni.";
+    if (err && err.message === "no-key") return "Manca la chiave app. Aprine le Impostazioni.";
+    if (err && err.status === 401) return "Chiave non valida. Controlla le Impostazioni.";
+    if (err && err.status === 429) return "Hai raggiunto il limite giornaliero di ricerche.";
+    if (!online()) return "Serve una connessione a internet.";
+    return "Qualcosa è andato storto: " + (err && err.message ? err.message : "riprova.");
+  }
+
+  // ---------------------------------------------------------------
+  // RICERCA -> CANDIDATI
+  // ---------------------------------------------------------------
+  function doSearch() {
+    var q = $("q").value.trim();
+    $("search-msg").innerHTML = "";
+    if (!q) { $("search-msg").innerHTML = '<p class="error">Scrivi o detta qualcosa prima.</p>'; return; }
+
+    show("candidates");
+    $("cand-list").innerHTML = "";
+    $("cand-empty").hidden = true;
+    $("cand-loading").hidden = false;
+
+    api("/identify", { method: "POST", body: { q: q } })
+      .then(function (data) {
+        $("cand-loading").hidden = true;
+        var list = (data && data.candidates) || [];
+        if (!list.length) { $("cand-empty").hidden = false; return; }
+        list.forEach(function (c) {
+          var b = document.createElement("button");
+          b.type = "button";
+          b.className = "card";
+          var meta = [c.artist, c.year].filter(Boolean).join(" · ");
+          b.innerHTML =
+            '<div class="t"></div><div class="a"></div>' +
+            (c.why ? '<div class="w"></div>' : "");
+          b.querySelector(".t").textContent = c.title || "(senza titolo)";
+          b.querySelector(".a").textContent = meta;
+          if (c.why) b.querySelector(".w").textContent = c.why;
+          b.addEventListener("click", function () { openDetails(c.title, c.artist, q); });
+          $("cand-list").appendChild(b);
+        });
+      })
+      .catch(function (err) {
+        $("cand-loading").hidden = true;
+        $("cand-empty").hidden = false;
+        $("cand-empty").querySelector(".error").textContent = apiErrorText(err);
+      });
+  }
+
+  // ---------------------------------------------------------------
+  // CANDIDATO -> RISULTATO
+  // ---------------------------------------------------------------
+  function openDetails(title, artist, query) {
+    show("result");
+    $("res-body").hidden = true;
+    $("res-msg").innerHTML = "";
+    $("res-loading").hidden = false;
+
+    api("/details", { method: "POST", body: { title: title, artist: artist, query: query || "" } })
+      .then(function (data) {
+        $("res-loading").hidden = true;
+        var it = data.itunes || {};
+        var result = {
+          title: it.trackName || title,
+          artist: it.artistName || artist,
+          album: it.collectionName || "",
+          year: it.year || "",
+          artwork: it.artwork || "",
+          facts: data.facts || [],
+          lyrics: data.lyrics || "",
+          lyricsSource: data.lyricsSource || ""
+        };
+        renderResult(result);
+        saveRecent(result);
+      })
+      .catch(function (err) {
+        $("res-loading").hidden = true;
+        $("res-msg").innerHTML = '<p class="error"></p>';
+        $("res-msg").querySelector(".error").textContent = apiErrorText(err);
+      });
+  }
+
+  function renderResult(r) {
+    $("res-body").hidden = false;
+
+    if (r.artwork) { $("res-cover").src = r.artwork; $("res-cover").hidden = false; }
+    else { $("res-cover").hidden = true; $("res-cover").removeAttribute("src"); }
+
+    $("res-title").textContent = r.title || "";
+    $("res-artist").textContent = r.artist || "";
+    $("res-album").textContent = [r.album, r.year].filter(Boolean).join(" · ");
+
+    var ul = $("res-facts");
+    ul.innerHTML = "";
+    if (r.facts && r.facts.length) {
+      $("res-facts-block").hidden = false;
+      r.facts.forEach(function (f) {
+        var li = document.createElement("li");
+        li.textContent = f;
+        ul.appendChild(li);
+      });
+    } else {
+      $("res-facts-block").hidden = true;
+    }
+
+    var wrap = $("res-lyrics-wrap");
+    if (r.lyrics) {
+      wrap.hidden = false;
+      $("res-lyrics").textContent = r.lyrics;
+      $("res-lyrics-src").textContent = r.lyricsSource ? "fonte: " + r.lyricsSource : "";
+    } else {
+      wrap.hidden = true;
+      var g = "https://genius.com/search?q=" + encodeURIComponent((r.artist || "") + " " + (r.title || ""));
+      $("res-lyrics-src").innerHTML = 'Testo non trovato. <a href="' + g + '" target="_blank" rel="noopener">Cerca su Genius →</a>';
+    }
+
+    var term = encodeURIComponent((r.artist || "") + " " + (r.title || ""));
+    $("res-listen").innerHTML =
+      '<a target="_blank" rel="noopener" href="https://music.apple.com/it/search?term=' + term + '">Apple Music</a>' +
+      '<a target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=' + term + '">YouTube</a>' +
+      '<a target="_blank" rel="noopener" href="https://open.spotify.com/search/' + term + '">Spotify</a>';
+
+    $("res-share").onclick = function () {
+      var txt = r.title + " — " + r.artist + (r.facts && r.facts[0] ? "\n\n" + r.facts[0] : "");
+      if (navigator.share) {
+        navigator.share({ text: txt }).catch(function () {});
+      } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(txt).then(function () {
+          $("res-share").textContent = "Copiato ✓";
+          setTimeout(function () { $("res-share").textContent = "Condividi"; }, 1500);
+        });
+      }
+    };
+  }
+
+  // ---------------------------------------------------------------
+  // CACHE LOCALE (rilettura offline)
+  // ---------------------------------------------------------------
+  function readRecent() {
+    try { return JSON.parse(lsGet(LS.recent) || "[]"); } catch (e) { return []; }
+  }
+  function saveRecent(r) {
+    var list = readRecent();
+    var entry = {
+      ts: new Date().toISOString(),
+      title: r.title, artist: r.artist, album: r.album, year: r.year,
+      artwork: r.artwork, facts: r.facts, lyrics: r.lyrics, lyricsSource: r.lyricsSource
+    };
+    list = list.filter(function (x) { return !(x.title === entry.title && x.artist === entry.artist); });
+    list.unshift(entry);
+    if (list.length > MAX_RECENT) list = list.slice(0, MAX_RECENT);
+    lsSet(LS.recent, JSON.stringify(list));
+  }
+
+  // ---------------------------------------------------------------
+  // STORICO
+  // ---------------------------------------------------------------
+  function fmtDate(iso) {
+    var d = new Date(iso);
+    if (isNaN(d)) return "";
+    function p(n) { return (n < 10 ? "0" : "") + n; }
+    return p(d.getDate()) + "/" + p(d.getMonth() + 1) + "/" + d.getFullYear();
+  }
+
+  function loadHistory() {
+    show("history");
+    $("hist-list").innerHTML = "";
+    $("hist-msg").innerHTML = "";
+
+    if (!online()) {
+      renderHistoryRows(readRecent(), true);
+      $("hist-msg").innerHTML = '<p class="hint">Offline: mostro solo i risultati recenti su questo telefono.</p>';
+      return;
+    }
+
+    $("hist-loading").hidden = false;
+    var q = $("hist-q").value.trim();
+    api("/history?limit=50" + (q ? "&q=" + encodeURIComponent(q) : ""))
+      .then(function (data) {
+        $("hist-loading").hidden = true;
+        renderHistoryRows((data && data.rows) || [], false);
+      })
+      .catch(function (err) {
+        $("hist-loading").hidden = true;
+        renderHistoryRows(readRecent(), true);
+        $("hist-msg").innerHTML = '<p class="hint">' + apiErrorText(err) + ' Mostro i recenti locali.</p>';
+      });
+  }
+
+  function renderHistoryRows(rows, fromCache) {
+    var box = $("hist-list");
+    box.innerHTML = "";
+    if (!rows.length) { box.innerHTML = '<p class="hint">Ancora niente qui.</p>'; return; }
+    rows.forEach(function (row) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "row";
+      b.innerHTML = '<div class="t"></div><div class="m"></div>';
+      b.querySelector(".t").textContent = row.title + " — " + row.artist;
+      b.querySelector(".m").textContent = [row.year, fmtDate(row.ts)].filter(Boolean).join(" · ");
+      b.addEventListener("click", function () {
+        if (fromCache && row.lyrics !== undefined) {
+          show("result");
+          $("res-loading").hidden = true;
+          renderResult(row);
+        } else {
+          openDetails(row.title, row.artist, row.query || "");
+        }
+      });
+      box.appendChild(b);
+    });
+  }
+
+  var histTimer = null;
+  $("hist-q").addEventListener("input", function () {
+    clearTimeout(histTimer);
+    histTimer = setTimeout(loadHistory, 350);
+  });
+
+  // ---------------------------------------------------------------
+  // IMPOSTAZIONI
+  // ---------------------------------------------------------------
+  function openSettings() {
+    show("settings");
+    $("set-msg").innerHTML = "";
+    $("set-url").value = lsGet(LS.url) || (DEFAULT_WORKER_URL.indexOf("CHANGEME") === -1 ? DEFAULT_WORKER_URL : "");
+    $("set-key").value = lsGet(LS.key) || "";
+  }
+  $("set-save").addEventListener("click", function () {
+    var u = $("set-url").value.trim().replace(/\/+$/, "");
+    var k = $("set-key").value.trim();
+    if (u) lsSet(LS.url, u);
+    if (k) lsSet(LS.key, k);
+    $("set-msg").innerHTML = '<p class="hint">Salvato ✓</p>';
+  });
+
+  // ---------------------------------------------------------------
+  // NAV
+  // ---------------------------------------------------------------
+  $("go").addEventListener("click", doSearch);
+  $("cand-back").addEventListener("click", function () { show("search"); });
+  $("res-new").addEventListener("click", function () { $("q").value = ""; show("search"); });
+  $("hist-back").addEventListener("click", function () { show("search"); });
+  $("set-back").addEventListener("click", function () { show("search"); });
+  $("nav-history").addEventListener("click", loadHistory);
+  $("nav-settings").addEventListener("click", openSettings);
+
+  // primo avvio: se manca la config, manda alle impostazioni
+  if (!appKey() || workerUrl().indexOf("CHANGEME") !== -1) {
+    openSettings();
+    $("set-msg").innerHTML = '<p class="hint">Prima di iniziare: incolla URL del Worker e chiave app.</p>';
+  } else {
+    show("search");
+  }
+});
+</script>
+</body>
+</html>
