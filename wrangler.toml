@@ -1,0 +1,17 @@
+name = "che-canzone-api"
+main = "worker/worker.js"
+compatibility_date = "2025-01-01"
+
+# tetto giornaliero di ricerche completate (INSERT su D1)
+[vars]
+DAILY_CAP = "200"
+
+# database dello storico (schema in worker/schema.sql)
+[[d1_databases]]
+binding = "DB"
+database_name = "che-canzone"
+database_id = "5d2fb998-729f-4443-82bc-0fe187f07761"
+
+# secret (NON qui): impostati con
+#   wrangler secret put ANTHROPIC_API_KEY
+#   wrangler secret put APP_KEY

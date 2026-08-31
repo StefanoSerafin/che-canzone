@@ -2,22 +2,23 @@
  * che-canzone — Cloudflare Worker (cervello + proxy)
  * =================================================================
  * Endpoint:
- *   POST /identify   body {q}                -> {candidates:[{title,artist,year,why}]}
- *   POST /details    body {title,artist,query?} -> {facts,lyrics,lyricsSource,itunes}
- *   GET  /history?limit=50&q=                -> {rows:[{ts,query,title,artist,year,album}]}
+ *   POST /identify   body {q}                         -> {candidates:[{title,artist,year,why}]}
+ *   POST /details    body {title,artist,query?,year?,album?} -> {facts,lyrics,lyricsSource}
+ *   GET  /history?limit=50&q=                         -> {rows:[{ts,query,title,artist,year,album}]}
  *
- * Deploy: dashboard Cloudflare -> Workers & Pages -> il tuo Worker -> Edit Code
- *   incolla QUESTO file, poi Deploy. (Nessun deploy automatico: voluto.)
+ * NOTA iTunes: la copertina + i dati ufficiali NON passano da qui. Apple
+ * rate-limita in modo aggressivo il pool di IP dei Cloudflare Workers
+ * (429 "Rate limit ... itunes-apple-com"). L'app li recupera via JSONP
+ * direttamente dal browser (IP di casa), e passa year/album a /details
+ * per lo storico.
  *
- * Binding richiesto:
- *   DB                 -> database D1 "che-canzone" (Settings -> Bindings)
+ * Deploy: dashboard Cloudflare -> il Worker -> Edit Code -> incolla -> Deploy
+ *   oppure:  wrangler deploy   (vedi wrangler.toml + README)
  *
- * Secret / variabili richiesti (Settings -> Variables and Secrets):
- *   ANTHROPIC_API_KEY  (secret)  chiave API Anthropic
- *   APP_KEY            (secret)  segreto condiviso con l'app (header X-App-Key)
- *   DAILY_CAP          (var)     numero massimo di ricerche/giorno, default 200
- *
- * Schema DB: vedi worker/schema.sql (da eseguire una volta nella Console D1).
+ * Binding richiesto:   DB  -> database D1 "che-canzone"
+ * Secret richiesti:    ANTHROPIC_API_KEY, APP_KEY
+ * Variabile:           DAILY_CAP (default 200)
+ * Schema DB:           worker/schema.sql
  */
 
 const MODEL = "claude-haiku-4-5-20251001";
@@ -126,19 +127,14 @@ async function handleDetails(body, env) {
   const title = (body.title || "").toString().trim();
   const artist = (body.artist || "").toString().trim();
   const query = (body.query || "").toString().trim();
+  const year = (body.year || "").toString().trim();
+  const album = (body.album || "").toString().trim();
   if (!title || !artist) return json({ error: "title e artist richiesti." }, 400);
 
-  const [facts, lyricsRes, itunes] = await Promise.all([
+  const [facts, lyricsRes] = await Promise.all([
     getFacts(env, title, artist).catch(() => []),
     getLyrics(title, artist).catch(() => ({ lyrics: null, lyricsSource: null })),
-    getItunes(title, artist).catch(() => null),
   ]);
-
-  // dati canonici: preferisci iTunes
-  const canonTitle = (itunes && itunes.trackName) || title;
-  const canonArtist = (itunes && itunes.artistName) || artist;
-  const canonYear = (itunes && itunes.year) || "";
-  const canonAlbum = (itunes && itunes.collectionName) || "";
 
   // log su D1 (non deve mai far fallire la risposta)
   try {
@@ -148,10 +144,10 @@ async function handleDetails(body, env) {
       .bind(
         new Date().toISOString(),
         query || `${artist} ${title}`,
-        canonTitle,
-        canonArtist,
-        canonYear,
-        canonAlbum
+        title,
+        artist,
+        year,
+        album
       )
       .run();
   } catch (e) {
@@ -162,7 +158,6 @@ async function handleDetails(body, env) {
     facts,
     lyrics: lyricsRes.lyrics,
     lyricsSource: lyricsRes.lyricsSource,
-    itunes,
   });
 }
 
@@ -177,9 +172,7 @@ async function getFacts(env, title, artist) {
   const data = await anthropic(env, {
     system,
     max_tokens: 800,
-    messages: [
-      { role: "user", content: `Brano: "${title}" di ${artist}` },
-    ],
+    messages: [{ role: "user", content: `Brano: "${title}" di ${artist}` }],
   });
 
   const text = extractText(data);
@@ -201,30 +194,6 @@ async function getLyrics(title, artist) {
   const hit = arr.find((x) => x && x.plainLyrics && x.plainLyrics.trim());
   if (!hit) return { lyrics: null, lyricsSource: null };
   return { lyrics: hit.plainLyrics.trim(), lyricsSource: "LRCLIB" };
-}
-
-async function getItunes(title, artist) {
-  const u =
-    "https://itunes.apple.com/search?term=" +
-    encodeURIComponent(`${artist} ${title}`) +
-    "&entity=song&limit=1&country=IT";
-  const r = await fetch(u);
-  if (!r.ok) return null;
-  const data = await r.json();
-  const hit = data && Array.isArray(data.results) ? data.results[0] : null;
-  if (!hit) return null;
-  const artwork = (hit.artworkUrl100 || "").replace(
-    "100x100bb",
-    "600x600bb"
-  );
-  const year = (hit.releaseDate || "").slice(0, 4);
-  return {
-    trackName: str(hit.trackName),
-    artistName: str(hit.artistName),
-    collectionName: str(hit.collectionName),
-    year,
-    artwork,
-  };
 }
 
 /* ------------------------------------------------------------------ */

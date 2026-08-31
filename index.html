@@ -263,7 +263,7 @@ document.addEventListener("DOMContentLoaded", function () {
   "use strict";
 
   // ---- default: sostituito allo Step 8 con l'URL reale del Worker ----
-  var DEFAULT_WORKER_URL = "https://che-canzone-api.CHANGEME.workers.dev";
+  var DEFAULT_WORKER_URL = "https://che-canzone-api.serafin-stefano72.workers.dev";
 
   var LS = {
     url: "cc_url",
@@ -368,6 +368,46 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ---------------------------------------------------------------
+  // iTunes: copertina + dati ufficiali via JSONP dal browser
+  // (Apple rate-limita il pool IP dei Cloudflare Workers, quindi non
+  //  si puo' proxare dal Worker — si chiama qui, dall'IP di casa.)
+  // ---------------------------------------------------------------
+  function itunesLookup(title, artist) {
+    return new Promise(function (resolve) {
+      var cb = "cc_it_" + Date.now() + "_" + Math.floor(Math.random() * 1e6);
+      var s = document.createElement("script");
+      var done = false;
+      function finish(val) {
+        if (done) return;
+        done = true;
+        clearTimeout(timer);
+        try { delete window[cb]; } catch (e) { window[cb] = undefined; }
+        if (s.parentNode) s.parentNode.removeChild(s);
+        resolve(val || {});
+      }
+      var timer = setTimeout(function () { finish({}); }, 5000);
+      window[cb] = function (data) {
+        try {
+          var r = data && data.results && data.results[0];
+          if (!r) return finish({});
+          finish({
+            title: r.trackName || "",
+            artist: r.artistName || "",
+            album: r.collectionName || "",
+            year: (r.releaseDate || "").slice(0, 4),
+            artwork: (r.artworkUrl100 || "").replace("100x100bb", "600x600bb")
+          });
+        } catch (e) { finish({}); }
+      };
+      s.onerror = function () { finish({}); };
+      s.src = "https://itunes.apple.com/search?term=" +
+        encodeURIComponent(artist + " " + title) +
+        "&entity=song&limit=1&country=IT&callback=" + cb;
+      document.head.appendChild(s);
+    });
+  }
+
+  // ---------------------------------------------------------------
   // CANDIDATO -> RISULTATO
   // ---------------------------------------------------------------
   function openDetails(title, artist, query) {
@@ -376,14 +416,19 @@ document.addEventListener("DOMContentLoaded", function () {
     $("res-msg").innerHTML = "";
     $("res-loading").hidden = false;
 
-    api("/details", { method: "POST", body: { title: title, artist: artist, query: query || "" } })
-      .then(function (data) {
+    itunesLookup(title, artist).then(function (it) {
+      return api("/details", {
+        method: "POST",
+        body: {
+          title: title, artist: artist, query: query || "",
+          year: it.year || "", album: it.album || ""
+        }
+      }).then(function (data) {
         $("res-loading").hidden = true;
-        var it = data.itunes || {};
         var result = {
-          title: it.trackName || title,
-          artist: it.artistName || artist,
-          album: it.collectionName || "",
+          title: it.title || title,
+          artist: it.artist || artist,
+          album: it.album || "",
           year: it.year || "",
           artwork: it.artwork || "",
           facts: data.facts || [],
@@ -392,12 +437,12 @@ document.addEventListener("DOMContentLoaded", function () {
         };
         renderResult(result);
         saveRecent(result);
-      })
-      .catch(function (err) {
-        $("res-loading").hidden = true;
-        $("res-msg").innerHTML = '<p class="error"></p>';
-        $("res-msg").querySelector(".error").textContent = apiErrorText(err);
       });
+    }).catch(function (err) {
+      $("res-loading").hidden = true;
+      $("res-msg").innerHTML = '<p class="error"></p>';
+      $("res-msg").querySelector(".error").textContent = apiErrorText(err);
+    });
   }
 
   function renderResult(r) {
