@@ -21,7 +21,9 @@
  * Schema DB:           worker/schema.sql
  */
 
-const MODEL = "claude-haiku-4-5-20251001";
+const MODEL = "claude-haiku-5-5";
+// Haiku 5.5 ragiona di default: sforzo basso per risposte brevi e veloci
+const EFFORT = "low";
 const ANTHROPIC_URL = "https://api.anthropic.com/v1/messages";
 const ANTHROPIC_VERSION = "2023-06-01";
 
@@ -101,7 +103,7 @@ async function handleIdentify(body, env) {
 
   const data = await anthropic(env, {
     system,
-    max_tokens: 700,
+    max_tokens: 2000,
     messages: [{ role: "user", content: q }],
   });
 
@@ -171,7 +173,7 @@ async function getFacts(env, title, artist) {
 
   const data = await anthropic(env, {
     system,
-    max_tokens: 800,
+    max_tokens: 2000,
     messages: [{ role: "user", content: `Brano: "${title}" di ${artist}` }],
   });
 
@@ -247,7 +249,13 @@ async function anthropic(env, { system, max_tokens, messages }) {
       "anthropic-version": ANTHROPIC_VERSION,
       "content-type": "application/json",
     },
-    body: JSON.stringify({ model: MODEL, system, max_tokens, messages }),
+    body: JSON.stringify({
+      model: MODEL,
+      system,
+      max_tokens,
+      output_config: { effort: EFFORT },
+      messages,
+    }),
   });
   if (!r.ok) {
     const t = await r.text();

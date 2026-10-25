@@ -127,7 +127,7 @@ npx wrangler@4 d1 execute che-canzone --remote --command "DELETE FROM lookups;"
 ## Costi
 
 - **Cloudflare** Workers + D1: tier gratuito (100k richieste/giorno, 5 GB). Sovrabbondante.
-- **Anthropic** Claude Haiku 4.5: < 0,5 cent a ricerca completa. Con `DAILY_CAP = 200`
+- **Anthropic** Claude Haiku 5.5: molto meno di 0,1 cent a ricerca completa (un decimo del prezzo di Haiku 4.5). Con `DAILY_CAP = 200`
   il tetto di spesa è pochi centesimi/giorno nel caso peggiore.
 
 ## Limiti noti
